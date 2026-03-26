@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dino Memory</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="title-row">
+      <div class="logo">
+        <span class="badge">🦕</span>
+        <div>
+          <p class="subline">Dino</p>
+          <h1>Memory</h1>
+        </div>
+      </div>
+      <div class="action-row">
+        <div class="button-group">
+          <button class="secondary" id="theme-toggle" type="button" aria-pressed="false">Lightmodus</button>
+          <button class="secondary" id="duo-toggle" type="button" aria-pressed="false">2-Spieler aus</button>
+          <button class="secondary" id="mode-toggle" type="button" aria-pressed="false">Hardcore aus</button>
+        </div>
+        <div class="primary-action-group">
+          <button class="primary" id="new-game" type="button">Neues Spiel</button>
+          <div class="music-controls">
+            <label class="music-label" for="music-select">Musik</label>
+            <select id="music-select" aria-label="grundmusik"></select>
+            <button class="secondary" id="music-toggle" type="button" aria-pressed="false">Wiedergabe</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="scoreboard" aria-live="polite">
+      <div class="score">
+        <span>Spielzüge</span>
+        <strong id="moves">0</strong>
+      </div>
+      <div class="score">
+        <span>Paare gefunden</span>
+        <strong id="pairs">0/8</strong>
+      </div>
+      <div class="score">
+        <span>Zeit</span>
+        <strong id="timer">00:00</strong>
+      </div>
+      <div class="score" id="hardcore-moves" hidden>
+        <span>Verbleibende Züge</span>
+        <strong id="moves-left">16</strong>
+      </div>
+    </section>
+    <div class="status-area">
+      <p class="status" id="status-message" aria-live="assertive"></p>
+      <div class="status-actions">
+        <button class="secondary status-swap" id="duo-swap" type="button" hidden>Spieler tauschen</button>
+      </div>
+    </div>
+
+    <section class="highscore-section" aria-label="Highscore-Liste">
+      <h2>Highscore</h2>
+      <ol id="highscore-list" class="highscore-list">
+        <li class="highscore-placeholder">Noch keine Zeiten vorhanden.</li>
+      </ol>
+    </section>
+
+    <section class="grid" id="card-grid" aria-label="Memory-Spiel"></section>
+  </main>
+  <div
+    class="duo-modal-backdrop"
+    id="duo-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="duo-modal-title"
+    hidden
+  >
+    <form class="duo-modal" id="duo-form">
+      <h2 id="duo-modal-title">2-Spieler-Modus</h2>
+      <p>Trage die Namen von zwei Spielern ein, damit das Spiel starten kann.</p>
+      <label class="duo-label" for="duo-player-one">Spieler 1</label>
+      <input
+        id="duo-player-one"
+        name="playerOne"
+        type="text"
+        required
+        maxlength="20"
+        value="Spieler 1"
+      />
+      <label class="duo-label" for="duo-player-two">Spieler 2</label>
+      <input
+        id="duo-player-two"
+        name="playerTwo"
+        type="text"
+        required
+        maxlength="20"
+        value="Spieler 2"
+      />
+      <div class="duo-modal-actions">
+        <button class="secondary" type="button" id="duo-modal-cancel">Abbrechen</button>
+        <button class="primary" type="submit">Spiel starten</button>
+      </div>
+    </form>
+  </div>
+  <div
+    id="completion-highlight"
+    class="completion-highlight"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+    <div class="completion-highlight__orb" aria-hidden="true"></div>
+    <div class="completion-highlight__content">
+      <p id="completion-highlight-tag" class="completion-highlight__tag">Spiel geschafft</p>
+      <p id="completion-highlight-text" class="completion-highlight__message"></p>
+      <div class="completion-highlight__actions">
+        <button
+          id="completion-highlight-close"
+          class="secondary completion-highlight__close"
+          type="button"
+        >
+          Neues Spiel
+        </button>
+      </div>
+    </div>
+  </div>
+  <audio id="background-audio" preload="metadata" loop></audio>
+  <script src="script.js"></script>
+</body>
+</html>
