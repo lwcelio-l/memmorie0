@@ -651,7 +651,7 @@ body.modal-open {
   padding: 0.7rem 0.85rem;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.9);
-  color: var(--text);
+  color: #0d1c15;
   font-family: inherit;
 }
 
